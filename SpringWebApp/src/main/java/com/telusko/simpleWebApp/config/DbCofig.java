@@ -14,13 +14,20 @@ public class DbCofig {
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
+        //get values from environment variable:
+        String dbUrl = System.getenv("SPRING_DATASOURCE_URL");
+        String dbUser = System.getenv("SPRING_DATASOURCE_USERNAME");
+        String dbPswd = System.getenv("SPRING_DATASOURCE_PASSWORD");
+
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/telusko");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("Postgre.3110");
+        dataSource.setUrl(dbUrl != null ? dbUrl : "jdbc:postgresql://db:5432/telusko");
+        dataSource.setUsername(dbUser != null ? dbUser : "postgres");
+        dataSource.setPassword(dbPswd != null ? dbPswd : "Postgre.3110");
+//        dataSource.setUrl(dbUrl);
+//        dataSource.setUsername(dbUser);
+//        dataSource.setPassword(dbPswd);
 
         System.out.println("Database connection here.");
-
         return dataSource;
     }
 }
