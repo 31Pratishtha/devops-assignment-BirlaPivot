@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-web-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: spring-web-app
+  template:
+    metadata:
+      labels:
+        app: spring-web-app
+    spec:
+      containers:
+        - name: spring-web-app
+          image: pratishthabp/spring-web-app:v1.0        # Replace with your actual Docker Hub image
+          ports:
+            - containerPort: 8080
